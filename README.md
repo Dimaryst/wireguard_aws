@@ -1,5 +1,5 @@
 # Install and use AWS-based Wireguard
-Scripts automate the installation and use of Wireguard on AWS with Ubuntu Server 18.04 / CentOS 7
+Scripts automate the installation and use of Wireguard on your own server
 
 ## How use
 
