@@ -59,7 +59,7 @@ PublicKey = $SERVER_PUBLIC_KEY
 PresharedKey = $CLIENT_PRESHARED_KEY
 AllowedIPs = $ALLOWED_IP
 Endpoint = $ENDPOINT
-PersistentKeepalive=25
+PersistentKeepalive=60
 EOF
 
 # Add new client data to the Wireguard configuration file
