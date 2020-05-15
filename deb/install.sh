@@ -1,7 +1,10 @@
 #!/bin/bash
 
 apt install software-properties-common -y
-add-apt-repository ppa:wireguard/wireguard -y
+echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list
+printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable
+# add-apt-repository ppa:wireguard/wireguard -y
+# add-apt-repository --remove ppa:wireguard/wireguard
 apt update
 apt install wireguard-dkms wireguard-tools qrencode -y
 
