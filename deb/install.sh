@@ -39,9 +39,9 @@ fi
 
 echo $SERVER_IP | grep -o -E '([0-9]+\.){3}' > ./vpn_subnet.var
 
-read -p "Enter the ip address of the server DNS (CIDR format), [ENTER] set to default: 1.1.1.1): " DNS
+read -p "Enter the ip address of the server DNS (CIDR format), [ENTER] set to default: 176.103.130.130): " DNS
 if [ -z $DNS ]
-then DNS="1.1.1.1"
+then DNS="176.103.130.130"
 fi
 echo $DNS > ./dns.var
 
