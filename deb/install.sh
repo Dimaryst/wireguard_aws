@@ -1,13 +1,14 @@
 #!/bin/bash
 
 apt install software-properties-common -y
-echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list
-printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable
-# add-apt-repository ppa:wireguard/wireguard -y
-# add-apt-repository --remove ppa:wireguard/wireguard
+# Debian
+#echo "deb http://deb.debian.org/debian/ unstable main" > /etc/apt/sources.list.d/unstable-wireguard.list
+#printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable
+add-apt-repository ppa:wireguard/wireguard -y
 apt update
-apt install wireguard-dkms wireguard-tools qrencode -y
+apt install wireguard-dkms wireguard-tools qrencode wget -y
 
+ext_ip=`wget eth0.me -qO-`
 
 NET_FORWARD="net.ipv4.ip_forward=1"
 sysctl -w  ${NET_FORWARD}
@@ -23,11 +24,13 @@ SERVER_PUBKEY=$( echo $SERVER_PRIVKEY | wg pubkey )
 echo $SERVER_PUBKEY > ./server_public.key
 echo $SERVER_PRIVKEY > ./server_private.key
 
+echo -en "\n \033[33m Your's IP is: $ext_ip \033[0m  \n";
 read -p "Enter the endpoint (external ip and port) in format [ipv4:port] (e.g. 4.3.2.1:54321):" ENDPOINT
 if [ -z $ENDPOINT ]
 then
-echo "[#]Empty endpoint. Exit"
-exit 1;
+$ENDPOINT = $ext_ip
+# echo "[#]Empty endpoint. Exit"
+# exit 1;
 fi
 echo $ENDPOINT > ./endpoint.var
 
