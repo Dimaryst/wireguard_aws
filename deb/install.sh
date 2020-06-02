@@ -6,7 +6,8 @@ apt install software-properties-common -y
 #printf 'Package: *\nPin: release a=unstable\nPin-Priority: 150\n' > /etc/apt/preferences.d/limit-unstable
 add-apt-repository ppa:wireguard/wireguard -y
 apt update
-apt install wireguard-dkms wireguard-tools qrencode wget -y
+apt install wireguard wireguard-dkms wireguard-tools qrencode wget net-tools -y
+modprobe wireguard
 
 ext_ip=`wget eth0.me -qO-`
 
@@ -25,7 +26,7 @@ echo $SERVER_PUBKEY > ./server_public.key
 echo $SERVER_PRIVKEY > ./server_private.key
 
 echo -en "\n \033[33m Your's IP is: $ext_ip \033[0m  \n";
-read -p "Enter the endpoint (external ip and port) in format [ipv4:port] (e.g. 4.3.2.1:54321):" ENDPOINT
+read -p "Enter the endpoint (external ip and port) in format [ipv4:port] (e.g. 4.3.2.1:51820):" ENDPOINT
 if [ -z $ENDPOINT ]
 then
 $ENDPOINT = $ext_ip
